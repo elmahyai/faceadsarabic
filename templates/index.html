@@ -45,7 +45,7 @@
                     <ul>
                         <li>
                             <img src="{{ url_for('static', filename='images/brush.png')}}">
-                            <span><small id="Age">جاري التحميل ..</small> سنة</span>
+                            <span><small id="Age">جاري التحميل ..</small> عام</span>
                         </li>
                         <li>
                             <img src="{{ url_for('static', filename='images/gender.png')}}">
@@ -68,36 +68,36 @@
                         <ul>
                             <li>
                                 <label>الكل</label>
-                                <span id="All">0</span>
+                                <span style="font-weight: normal" id="All">0</span>
                             </li>
                             <li>
                                 <label>الذكور</label>
-                                <span id="Males">0</span>
+                                <span style="font-weight: normal" id="Males">0</span>
                             </li>
                             <li>
                                 <label>الاناث</label>
-                                <span id="Females">0</span>
+                                <span style="font-weight: normal" id="Females">0</span>
                             </li>
                             <li>
                                 <label>النظارات</label>
-                                <span id="Glasses">0</span>
+                                <span style="font-weight: normal" id="Glasses">0</span>
                             </li>
                         </ul>
                     </fieldset>
                     <fieldset>
-                        <legend>إعلانات</legend>
+                        <legend>الإعلانات</legend>
                         <ul>
                             <li>
                                 <label>إعلانات ذكور</label>
-                                <span id="Males_Ads">0</span>
+                                <span style="font-weight: normal"  id="Males_Ads">0</span>
                             </li>
                             <li>
                                 <label>إعلانات الاناث</label>
-                                <span  id="Females_Ads">0</span>
+                                <span  style="font-weight: normal"  id="Females_Ads">0</span>
                             </li>
                             <li>
                                 <label>إعلانات النظارات</label>
-                                <span id="Glasses_Ads">0</span>
+                                <span style="font-weight: normal"  id="Glasses_Ads">0</span>
                             </li>
                         </ul>
                     </fieldset>
@@ -106,18 +106,18 @@
                         <ul>
                             <li>
                                 <label>للمشاهد الحالي</label>
-                                <span id="Current_Viewer">0</span>
+                                <span style="font-weight: normal"  id="Current_Viewer">0</span>
                             </li>
                             <li>
                                 <label>الوقت الكلي</label>
-                                <span id="Total_times">0</span>
+                                <span style="font-weight: normal"  id="Total_times">0</span>
                             </li>
                             <br>
                             <small>الوقت بالثواني</small>
                         </ul>
                     </fieldset>
                     <fieldset>
-                        <legend> ابتسم ل  <small id="emotion_to_zero">10</small>  ثواني</legend>
+                        <legend> ابتسم ل  <small id="emotion_to_zero">7</small>  ثواني</legend>
                         <ul>
                             <li>
                                 <label id="Happy">سعيد</label>
@@ -374,6 +374,8 @@
 
         return (values[half - 1] + values[half]) / 2.0;
       }
+
+      function getRandomArbitrary(min, max) { return Math.floor(Math.random() * (max - min) + min)}
       
       async function onPlay(videoEl) {
 
@@ -404,7 +406,7 @@
 
 
                 if (emotion_to_zero < 1){
-                    emotion_to_zero = 10
+                    emotion_to_zero = 7
                     happyCounter = 0
                     normalCounter = 0 
                     start_smiling_counter = 0
@@ -593,7 +595,7 @@
       var gender1 = ''
       var glassesvariable = ''
       var sadzone = 0
-      var emotion_to_zero = 10
+      var emotion_to_zero = 7
       var Males_Ads = 0
       var Females_Ads = 0
       var Glasses_Ads = 0
@@ -621,11 +623,17 @@
           }).then((response) => response.json()).then((json) =>  {
               message_to_show = json["results"] + '\n' + json["accuracy"]
               glassesvariable = json["results"] 
-              if (video1.getAttribute("src") === "{{ url_for('static', filename='images/m.mp4') }}"){
+              if (video1.getAttribute("src") === "{{ url_for('static', filename='images/m1.mp4') }}" ||
+              video1.getAttribute("src") === "{{ url_for('static', filename='images/m2.mp4') }}" ||
+              video1.getAttribute("src") === "{{ url_for('static', filename='images/m3.3mp4') }}" 
+              ){
                   current_video = "man"
               } else if (video1.getAttribute("src") === "{{ url_for('static', filename='images/w.mp4') }}") {
                   current_video = "woman"
-              } else if (video1.getAttribute("src") === "{{ url_for('static', filename='images/g.mp4') }}") {
+              } else if (video1.getAttribute("src") === "{{ url_for('static', filename='images/g1.mp4') }}" ||
+              video1.getAttribute("src") === "{{ url_for('static', filename='images/g2.mp4') }}" ||
+              video1.getAttribute("src") === "{{ url_for('static', filename='images/g3.mp4') }}"
+              ) {
                   current_video = "glasses"
               } 
               //else if (video1.getAttribute("src") === "{{ url_for('static', filename='images/sad.mp4') }}") {
@@ -639,18 +647,33 @@
                 //} else 
                 if (json["results"] === "glasses"){
                     if (current_video != "glasses"){
-                        document.getElementById('Wearing_Glasses').innerHTML = "مرتدي نظارة";
-                        video1.setAttribute("src", "{{ url_for('static', filename='images/g.mp4')}}")
+                        document.getElementById('Wearing_Glasses').innerHTML = "يرتدي نظارة";
+                        var randomnum = getRandomArbitrary(1,4)
+                        if (randomnum === 1){
+                            video1.setAttribute("src", "{{ url_for('static', filename='images/g1.mp4')}}")
+                        }else if (randomnum === 2){
+                            video1.setAttribute("src", "{{ url_for('static', filename='images/g2.mp4')}}")
+                        } else if (randomnum === 3){
+                            video1.setAttribute("src", "{{ url_for('static', filename='images/g3.mp4')}}")
+                        }
                         Glasses_Ads = Glasses_Ads + 1
                         document.getElementById('Glasses_Ads').innerHTML = Glasses_Ads;
                     }
                 } else if (json["results"] === "noglasses"){
-                    document.getElementById('Wearing_Glasses').innerHTML = "غير مرتدي نظارة";
+                    document.getElementById('Wearing_Glasses').innerHTML = "لا يرتدي نظارة";
                     if (gender1 === "male"){
                         if (current_video != "man"){
                             Males_Ads = Males_Ads + 1
                             document.getElementById('Males_Ads').innerHTML = Males_Ads;
-                            video1.setAttribute("src", "{{ url_for('static', filename='images/m.mp4')}}")
+                            var randomnum = getRandomArbitrary(1,4)
+                            if (randomnum === 1){
+                                video1.setAttribute("src", "{{ url_for('static', filename='images/m1.mp4')}}")
+                            }else if (randomnum === 2){
+                                video1.setAttribute("src", "{{ url_for('static', filename='images/m2.mp4')}}")
+                            } else if (randomnum === 3){
+                                video1.setAttribute("src", "{{ url_for('static', filename='images/m3.mp4')}}")
+                            }
+                            
                         }
                     } else if (gender1 === "female"){
                         if (current_video != "woman"){
