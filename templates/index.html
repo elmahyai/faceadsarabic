@@ -79,8 +79,12 @@
                                 <span style="font-weight: normal" id="Females">0</span>
                             </li>
                             <li>
-                                <label>النظارات</label>
-                                <span style="font-weight: normal" id="Glasses">0</span>
+                                <label>النظارات-رجال</label>
+                                <span style="font-weight: normal" id="Glasses_man">0</span>
+                            </li>
+                            <li>
+                                <label>النظارات-إناث</label>
+                                <span style="font-weight: normal" id="Glasses_woman">0</span>
                             </li>
                         </ul>
                     </fieldset>
@@ -512,12 +516,12 @@
 
                     countermanglasses = countermanglasses + 1
                     document.getElementById('Males').innerHTML = countermanglasses + countermannoglasses;
-                    document.getElementById('Glasses').innerHTML = countermanglasses + counterwomanglasses;
+                    document.getElementById('Glasses_man').innerHTML = countermanglasses ;
                 } else if (gender1 === "female" && glassesvariable === 'glasses') {
 
                     counterwomanglasses = counterwomanglasses + 1
                     document.getElementById('Females').innerHTML = counterwomanglasses + counterwomannoglasses;
-                    document.getElementById('Glasses').innerHTML = countermanglasses + counterwomanglasses;
+                    document.getElementById('Glasses_woman').innerHTML =  counterwomanglasses;
                 } else if (gender1 === "male" && glassesvariable === 'noglasses') {
 
                     countermannoglasses = countermannoglasses + 1
