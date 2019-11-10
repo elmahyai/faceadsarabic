@@ -311,7 +311,8 @@
 
         faceapi.nets.ageGenderNet.loadFromUri("{{ url_for('static', filename='/models')}}")
         faceapi.nets.ssdMobilenetv1.loadFromUri("{{ url_for('static', filename='/models')}}")
-
+        
+        faceapi.nets.faceLandmark68Net.loadFromUri("{{ url_for('static', filename='/models')}}")
         faceapi.nets.faceExpressionNet.loadFromUri("{{ url_for('static', filename='/models')}}")
 </script>
 <script>
@@ -380,7 +381,7 @@
       async function onPlay(videoEl) {
 
           const options = new faceapi.TinyFaceDetectorOptions({ inputSize: 416, scoreThreshold: 0.2 })
-          var result = await faceapi.detectSingleFace(videoEl, options).withFaceExpressions().withAgeAndGender()
+          var result = await faceapi.detectSingleFace(videoEl, options).withFaceLandmarks().withFaceExpressions().withAgeAndGender()
 
           if (result) {
               //console.log(result.age)
