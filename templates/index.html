@@ -34,7 +34,7 @@
         </div>
         <div class="modal-body">
             <div class="adv-content">
-              <video autoplay muted loop id="myVideo" src="{{ url_for('static', filename='images/img_waiting.mp4') }}" type="video/mp4">
+              <video autoplay muted loop id="myVideo" src="{{ url_for('static', filename='images/img_waiting.webm') }}" type="video/webm">
                         Your browser does not support the video tag.
               </video>
               
@@ -240,7 +240,7 @@
                     <div class="here-side-img">
                         <img src="{{ url_for('static', filename='images/face-IPMS.svg')}}" width="400px">
                         <div id="videocontainer" class="divcontainer text-center"  style="display: none;">		
-                            <video onplay="onPlay(this)" id="inputVideo" autoplay muted type="video/mp4"></video>		
+                            <video onplay="onPlay(this)" id="inputVideo" autoplay muted type="video/webm"></video>		
                         <canvas id="overlay" />		
                         </div>
                     </div>
@@ -554,8 +554,8 @@
 
 
               current_video = "" 
-              if (video1.getAttribute("src") !== "{{ url_for('static', filename='images/img_waiting.mp4') }}"){
-                  video1.setAttribute("src", "{{ url_for('static', filename='images/img_waiting.mp4') }}")
+              if (video1.getAttribute("src") !== "{{ url_for('static', filename='images/img_waiting.webm') }}"){
+                  video1.setAttribute("src", "{{ url_for('static', filename='images/img_waiting.webm') }}")
                }
               reversecounter = reversecounter + 1
 
@@ -624,16 +624,16 @@
           }).then((response) => response.json()).then((json) =>  {
               message_to_show = json["results"] + '\n' + json["accuracy"]
               glassesvariable = json["results"] 
-              if (video1.getAttribute("src") === "{{ url_for('static', filename='images/m1.mp4') }}" ||
-              video1.getAttribute("src") === "{{ url_for('static', filename='images/m2.mp4') }}" ||
-              video1.getAttribute("src") === "{{ url_for('static', filename='images/m3.3mp4') }}" 
+              if (video1.getAttribute("src") === "{{ url_for('static', filename='images/m1.webm') }}" ||
+              video1.getAttribute("src") === "{{ url_for('static', filename='images/m2.webm') }}" ||
+              video1.getAttribute("src") === "{{ url_for('static', filename='images/m3.webm') }}" 
               ){
                   current_video = "man"
-              } else if (video1.getAttribute("src") === "{{ url_for('static', filename='images/w.mp4') }}") {
+              } else if (video1.getAttribute("src") === "{{ url_for('static', filename='images/w.webm') }}") {
                   current_video = "woman"
-              } else if (video1.getAttribute("src") === "{{ url_for('static', filename='images/g1.mp4') }}" ||
-              video1.getAttribute("src") === "{{ url_for('static', filename='images/g2.mp4') }}" ||
-              video1.getAttribute("src") === "{{ url_for('static', filename='images/g3.mp4') }}"
+              } else if (video1.getAttribute("src") === "{{ url_for('static', filename='images/g1.webm') }}" ||
+              video1.getAttribute("src") === "{{ url_for('static', filename='images/g2.webm') }}" ||
+              video1.getAttribute("src") === "{{ url_for('static', filename='images/g3.webm') }}"
               ) {
                   current_video = "glasses"
               } 
@@ -651,11 +651,11 @@
                         document.getElementById('Wearing_Glasses').innerHTML = "يرتدي نظارة";
                         var randomnum = getRandomArbitrary(1,4)
                         if (randomnum === 1){
-                            video1.setAttribute("src", "{{ url_for('static', filename='images/g1.mp4')}}")
+                            video1.setAttribute("src", "{{ url_for('static', filename='images/g1.webm')}}")
                         }else if (randomnum === 2){
-                            video1.setAttribute("src", "{{ url_for('static', filename='images/g2.mp4')}}")
+                            video1.setAttribute("src", "{{ url_for('static', filename='images/g2.webm')}}")
                         } else if (randomnum === 3){
-                            video1.setAttribute("src", "{{ url_for('static', filename='images/g3.mp4')}}")
+                            video1.setAttribute("src", "{{ url_for('static', filename='images/g3.webm')}}")
                         }
                         Glasses_Ads = Glasses_Ads + 1
                         document.getElementById('Glasses_Ads').innerHTML = Glasses_Ads;
@@ -668,17 +668,17 @@
                             document.getElementById('Males_Ads').innerHTML = Males_Ads;
                             var randomnum = getRandomArbitrary(1,4)
                             if (randomnum === 1){
-                                video1.setAttribute("src", "{{ url_for('static', filename='images/m1.mp4')}}")
+                                video1.setAttribute("src", "{{ url_for('static', filename='images/m1.webm')}}")
                             }else if (randomnum === 2){
-                                video1.setAttribute("src", "{{ url_for('static', filename='images/m2.mp4')}}")
+                                video1.setAttribute("src", "{{ url_for('static', filename='images/m2.webm')}}")
                             } else if (randomnum === 3){
-                                video1.setAttribute("src", "{{ url_for('static', filename='images/m3.mp4')}}")
+                                video1.setAttribute("src", "{{ url_for('static', filename='images/m3.webm')}}")
                             }
                             
                         }
                     } else if (gender1 === "female"){
                         if (current_video != "woman"){
-                            video1.setAttribute("src", "{{ url_for('static', filename='images/w.mp4')}}")
+                            video1.setAttribute("src", "{{ url_for('static', filename='images/w.webm')}}")
 
                             Females_Ads = Females_Ads + 1
                             document.getElementById('Females_Ads').innerHTML = Females_Ads;
